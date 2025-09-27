@@ -13,7 +13,8 @@ export default function HeroSection() {
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Scene setup
+    const currentMount = mountRef.current;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -25,12 +26,11 @@ export default function HeroSection() {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
-    mountRef.current.appendChild(renderer.domElement);
+    currentMount.appendChild(renderer.domElement);
 
     sceneRef.current = scene;
     rendererRef.current = renderer;
 
-    // Create animated sphere with wireframe
     const sphereGeometry = new THREE.SphereGeometry(1.5, 32, 32);
     const sphereMaterial = new THREE.MeshPhongMaterial({
       color: 0x0099ff,
@@ -41,7 +41,6 @@ export default function HeroSection() {
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     scene.add(sphere);
 
-    // Create inner glowing sphere
     const innerSphereGeometry = new THREE.SphereGeometry(1.2, 16, 16);
     const innerSphereMaterial = new THREE.MeshBasicMaterial({
       color: 0x00ff99,
@@ -54,7 +53,6 @@ export default function HeroSection() {
     );
     scene.add(innerSphere);
 
-    // Neural network particles
     const particleCount = 100;
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
@@ -179,8 +177,8 @@ export default function HeroSection() {
       if (frameRef.current !== null) {
         cancelAnimationFrame(frameRef.current);
       }
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
+      if (currentMount && renderer.domElement) {
+        currentMount.removeChild(renderer.domElement);
       }
       renderer.dispose();
     };

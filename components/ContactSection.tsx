@@ -9,17 +9,19 @@ import {
   Twitter,
   MapPin,
   Youtube,
+  Send,
+  Loader2,
+  CheckCircle,
 } from "lucide-react";
 
-// --- Type Definitions ---
 interface SocialLink {
   name: string;
   icon: React.ElementType;
   url: string;
   color: string;
 }
+type SubmissionStatus = "idle" | "sending" | "success" | "error";
 
-// --- Component Data ---
 const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
@@ -42,18 +44,17 @@ const socialLinks: SocialLink[] = [
   {
     name: "Email",
     icon: Mail,
-    url: "icencodes@gmail.com",
+    url: "mailto:icencodes@gmail.com",
     color: "hover:text-green-400",
   },
   {
     name: "Youtube",
     icon: Youtube,
-    url: "mailto:vincentius.jacob@gmail.com",
-    color: "hover:text-green-400",
+    url: "https://www.youtube.com/channel/your-channel-id",
+    color: "hover:text-red-500",
   },
 ];
 
-// --- Main Component ---
 export default function ContactSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -62,6 +63,8 @@ export default function ContactSection() {
     subject: "",
     message: "",
   });
+  const [submissionStatus, setSubmissionStatus] =
+    useState<SubmissionStatus>("idle");
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -76,32 +79,66 @@ export default function ContactSection() {
     );
 
     const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
+    if (currentRef) observer.observe(currentRef);
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, you would send this data to a backend service.
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message!");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setSubmissionStatus("sending");
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmissionStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmissionStatus("idle"), 3000);
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmissionStatus("error");
+      setTimeout(() => setSubmissionStatus("idle"), 3000);
+    }
+  };
+
+  const renderButtonContent = () => {
+    switch (submissionStatus) {
+      case "sending":
+        return (
+          <>
+            <Loader2 size={18} className="animate-spin" /> Sending...
+          </>
+        );
+      case "success":
+        return (
+          <>
+            <CheckCircle size={18} /> Message Sent!
+          </>
+        );
+      case "error":
+        return <>Error! Try Again</>;
+      default:
+        return (
+          <>
+            <Send size={18} /> Send Message
+          </>
+        );
+    }
   };
 
   return (
@@ -109,7 +146,6 @@ export default function ContactSection() {
       ref={sectionRef}
       className="relative bg-black text-white min-h-screen py-20 px-6 overflow-hidden"
     >
-      {/* Animated Grid Background */}
       <div className="absolute inset-0 z-0 opacity-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_80%,#3e78ad33,transparent)]"></div>
@@ -128,13 +164,12 @@ export default function ContactSection() {
             <span className="text-white ml-4">Touch</span>
           </h2>
           <p className="text-gray-400 text-lg font-mono max-w-2xl mx-auto">
-            <span className="text-green-400">&gt;</span> I'm open to new
-            projects and collaborations. Let's connect.
+            <span className="text-green-400">&gt;</span>{" "}
+            {"I'm open to new projects and collaborations. Let's connect."}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-          {/* Left Column - Contact Form */}
           <div
             className={`transition-all duration-1000 delay-300 ${
               isVisible
@@ -146,7 +181,6 @@ export default function ContactSection() {
               <h3 className="text-3xl font-light text-white mb-6">
                 Send a <span className="text-green-400">Message</span>
               </h3>
-
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -206,20 +240,26 @@ export default function ContactSection() {
                     required
                   />
                 </div>
+
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg font-mono text-sm hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300"
+                  disabled={submissionStatus === "sending"}
+                  className={`w-full px-8 py-4 rounded-lg font-mono text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
+                    submissionStatus === "sending"
+                      ? "bg-gray-500"
+                      : submissionStatus === "success"
+                      ? "bg-green-600"
+                      : submissionStatus === "error"
+                      ? "bg-red-600"
+                      : "bg-gradient-to-r from-green-500 to-emerald-500 hover:shadow-lg hover:shadow-green-500/20 text-white"
+                  }`}
                 >
-                  <span className="flex items-center justify-center gap-2">
-                    <MessageCircle size={18} />
-                    Send Message
-                  </span>
+                  {renderButtonContent()}
                 </button>
               </form>
             </div>
           </div>
 
-          {/* Right Column - Contact Info & Social */}
           <div
             className={`space-y-8 transition-all duration-1000 delay-500 ${
               isVisible
@@ -251,7 +291,7 @@ export default function ContactSection() {
                   <div>
                     <h4 className="text-white font-medium mb-1">Email</h4>
                     <a
-                      href="mailto:vincentius.jacob@gmail.com"
+                      href="mailto:icencodes@gmail.com"
                       className="text-gray-400 hover:text-green-400 transition-colors"
                     >
                       icencodes@gmail.com
@@ -278,7 +318,6 @@ export default function ContactSection() {
                 </div>
               </div>
             </div>
-
             <div className="bg-gray-900/50 rounded-2xl border border-gray-800 p-8 backdrop-blur-sm">
               <h3 className="text-2xl font-light text-white mb-6">
                 Online <span className="text-purple-400">Profiles</span>
