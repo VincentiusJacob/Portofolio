@@ -85,7 +85,7 @@ const projectsData: Project[] = [
     status: "Prototype",
     color: "from-cyan-400 to-blue-500",
     year: "2024",
-    url: "https://twitterdash.netlify.app/twitterdash.html",
+    url: "https://github.com/VincentiusJacob/Storegg",
   },
   {
     id: 6,

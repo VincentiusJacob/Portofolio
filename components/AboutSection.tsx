@@ -71,6 +71,14 @@ const achievementData: AchievementData = {
         "Ranked among the top 20 teams nationwide for developing innovative AI solutions, selected from hundreds of participants.",
     },
   ],
+  "September 2025": [
+    {
+      title:
+        "🥇 1st Place – Dataquest 4.0 (Objective Quest), part of Airnology 4.0",
+      description:
+        "Achieved 1st Place in the Objective Quest category of Dataquest 4.0, part of Airnology 4.0, competing against 100+ teams nationwide. The challenge focused on applying NLP techniques to legal documents for predicting sentencing duration, demonstrating strengths in data science, problem-solving, and collaboration.",
+    },
+  ],
 };
 
 export default function AboutAndExperience() {
@@ -284,56 +292,118 @@ export default function AboutAndExperience() {
                   id: `${year}-${index}`,
                 }))
               )
-              .map((achievement, index) => (
-                <div
-                  key={achievement.id}
-                  className={`group relative transition-all duration-700 ${
-                    isVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-10"
-                  }`}
-                  style={{ transitionDelay: `${600 + index * 100}ms` }}
-                >
-                  {/* Glow Effect */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+              .map((achievement, index) => {
+                const isFirstPlace = achievement.title.includes("🥇 1st Place");
 
-                  {/* Achievement Card */}
-                  <div className="relative bg-gray-900/80 backdrop-blur-sm border border-gray-700/60 rounded-xl p-6 h-full hover:border-cyan-400/50 transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
-                    {/* Year Badge */}
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-mono px-3 py-1 rounded-full shadow-lg">
-                      {achievement.year}
-                    </div>
+                return (
+                  <div
+                    key={achievement.id}
+                    className={`group relative transition-all duration-700 ${
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-10"
+                    }`}
+                    style={{ transitionDelay: `${600 + index * 100}ms` }}
+                  >
+                    {/* Glow Effect */}
+                    <div
+                      className={`absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm ${
+                        isFirstPlace
+                          ? "bg-gradient-to-r from-yellow-500 to-amber-500"
+                          : "bg-gradient-to-r from-cyan-500 to-purple-500"
+                      }`}
+                    ></div>
 
-                    {/* Achievement Icon/Category */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 rounded-lg flex items-center justify-center border border-cyan-400/30">
-                        <div className="w-6 h-6 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full animate-pulse"></div>
+                    {/* Achievement Card */}
+                    <div
+                      className={`relative bg-gray-900/80 backdrop-blur-sm border rounded-xl p-6 h-full transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl ${
+                        isFirstPlace
+                          ? "border-yellow-500/60 hover:border-yellow-400 group-hover:shadow-yellow-500/10"
+                          : "border-gray-700/60 hover:border-cyan-400/50 group-hover:shadow-cyan-500/10"
+                      }`}
+                    >
+                      {/* Year Badge */}
+                      <div
+                        className={`absolute -top-3 -right-3 text-white text-sm font-mono px-3 py-1 rounded-full shadow-lg ${
+                          isFirstPlace
+                            ? "bg-gradient-to-r from-yellow-500 to-amber-600"
+                            : "bg-gradient-to-r from-cyan-500 to-blue-600"
+                        }`}
+                      >
+                        {achievement.year}
                       </div>
-                      <div className="text-cyan-400 text-xs uppercase tracking-wider font-semibold">
-                        Achievement
+
+                      {/* Achievement Icon/Category */}
+                      <div className="flex items-center gap-3 mb-4">
+                        <div
+                          className={`w-12 h-12 rounded-lg flex items-center justify-center border ${
+                            isFirstPlace
+                              ? "bg-gradient-to-br from-yellow-400/20 to-amber-500/20 border-yellow-400/30"
+                              : "bg-gradient-to-br from-cyan-400/20 to-purple-500/20 border-cyan-400/30"
+                          }`}
+                        >
+                          <div
+                            className={`w-6 h-6 rounded-full animate-pulse ${
+                              isFirstPlace
+                                ? "bg-gradient-to-r from-yellow-400 to-amber-400"
+                                : "bg-gradient-to-r from-cyan-400 to-purple-400"
+                            }`}
+                          ></div>
+                        </div>
+                        <div
+                          className={`text-xs uppercase tracking-wider font-semibold ${
+                            isFirstPlace ? "text-yellow-400" : "text-cyan-400"
+                          }`}
+                        >
+                          Achievement
+                        </div>
                       </div>
+
+                      {/* Content */}
+                      <div className="space-y-3">
+                        <h3
+                          className={`text-xl font-semibold text-white transition-colors duration-300 leading-tight ${
+                            isFirstPlace
+                              ? "group-hover:text-yellow-300"
+                              : "group-hover:text-cyan-300"
+                          }`}
+                        >
+                          {achievement.title}
+                        </h3>
+
+                        <p className="text-gray-400 text-sm leading-relaxed line-clamp-4">
+                          {achievement.description}
+                        </p>
+                      </div>
+
+                      {/* Hover Effect Bottom Bar */}
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-xl ${
+                          isFirstPlace
+                            ? "bg-gradient-to-r from-yellow-500 to-amber-500"
+                            : "bg-gradient-to-r from-cyan-500 to-purple-500"
+                        }`}
+                      ></div>
+
+                      {/* Corner Decorations */}
+                      <div
+                        className={`absolute top-4 left-4 w-3 h-3 border-l-2 border-t-2 transition-colors duration-300 ${
+                          isFirstPlace
+                            ? "border-yellow-400/30 group-hover:border-yellow-400"
+                            : "border-cyan-400/30 group-hover:border-cyan-400"
+                        }`}
+                      ></div>
+                      <div
+                        className={`absolute bottom-4 right-4 w-3 h-3 border-r-2 border-b-2 transition-colors duration-300 ${
+                          isFirstPlace
+                            ? "border-yellow-400/30 group-hover:border-yellow-400"
+                            : "border-cyan-400/30 group-hover:border-cyan-400"
+                        }`}
+                      ></div>
                     </div>
-
-                    {/* Content */}
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-semibold text-white group-hover:text-cyan-300 transition-colors duration-300 leading-tight">
-                        {achievement.title}
-                      </h3>
-
-                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-4">
-                        {achievement.description}
-                      </p>
-                    </div>
-
-                    {/* Hover Effect Bottom Bar */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-xl"></div>
-
-                    {/* Corner Decorations */}
-                    <div className="absolute top-4 left-4 w-3 h-3 border-l-2 border-t-2 border-cyan-400/30 group-hover:border-cyan-400 transition-colors duration-300"></div>
-                    <div className="absolute bottom-4 right-4 w-3 h-3 border-r-2 border-b-2 border-cyan-400/30 group-hover:border-cyan-400 transition-colors duration-300"></div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
           </div>
         </div>
       </section>
