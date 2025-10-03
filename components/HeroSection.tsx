@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import ProfilePicture from "../public/profilepicture.jpeg";
 
 export default function HeroSection() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -185,7 +186,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden">
       <div
         ref={mountRef}
         className="absolute inset-0 z-0"
@@ -196,80 +197,96 @@ export default function HeroSection() {
       />
 
       {/* AI Status Indicators */}
-      <div className="absolute top-24 right-8 z-10 space-y-3">
+      <div className="absolute top-8 sm:top-16 right-4 sm:right-8 z-10 space-y-3">
         <div
-          className="flex items-center gap-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 animate-fadeInRight"
+          className="flex items-center gap-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-xl px-3 sm:px-4 py-2 sm:py-3 animate-fadeInRight"
           style={{
             animationDelay: "2s",
             opacity: 1,
             animationFillMode: "forwards",
           }}
         >
-          <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse-glow" />
-          <span className="text-sm text-green-300 font-mono">
+          <div className="w-2 sm:w-3 h-2 sm:h-3 bg-green-400 rounded-full animate-pulse-glow" />
+          <span className="text-xs sm:text-sm text-green-300 font-mono">
             Status: Open to Opportunities
           </span>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center max-w-6xl">
+      <div className="relative z-10 text-center max-w-4xl sm:max-w-6xl">
         <div
-          className="mb-12 animate-fadeInUp"
+          className="mb-8 sm:mb-12 animate-fadeInUp"
           style={{
             animationDelay: "0.5s",
             opacity: 1,
             animationFillMode: "forwards",
           }}
         >
-          <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extralight leading-none tracking-tight text-white mb-6">
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extralight leading-none tracking-tight text-white mb-4 sm:mb-6">
             <span className="block bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent">
               Vincentius Jacob
             </span>
           </h1>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extralight leading-none tracking-tight">
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extralight leading-none tracking-tight">
             <span className="block bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent">
               Gunawan
             </span>
           </h2>
 
           <div
-            className="flex items-center justify-center mt-8 gap-4 animate-fadeInScale"
+            className="flex items-center justify-center mt-6 sm:mt-8 gap-4 animate-fadeInScale"
             style={{
               animationDelay: "1.5s",
               opacity: 1,
               animationFillMode: "forwards",
             }}
           >
-            <div className="h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent w-24" />
+            <div className="h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent w-16 sm:w-24" />
             <div className="flex gap-1">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-cyan-400 rounded-full animate-pulse" />
               <div
-                className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"
+                className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-blue-400 rounded-full animate-pulse"
                 style={{ animationDelay: "0.5s" }}
               />
               <div
-                className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"
+                className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-purple-400 rounded-full animate-pulse"
                 style={{ animationDelay: "1s" }}
               />
             </div>
-            <div className="h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent w-24" />
+            <div className="h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent w-16 sm:w-24" />
           </div>
+        </div>
+
+        {/* Profile Picture */}
+        <div
+          className="flex justify-center mb-6 sm:mb-8 animate-fadeIn"
+          style={{
+            animationDelay: "1s",
+            opacity: 1,
+            animationFillMode: "forwards",
+          }}
+        >
+          <img
+            src={ProfilePicture.src}
+            alt="Vincentius Jacob Gunawan"
+            className="w-40 h-40 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full border-2 border-cyan-400/50 object-cover shadow-lg shadow-cyan-400/20"
+          />
         </div>
 
         {/* Description */}
         <div
-          className="space-y-8 mb-16 animate-fadeIn"
+          className="space-y-6 sm:space-y-8 mb-12 sm:mb-16 animate-fadeIn"
           style={{
             animationDelay: "1.2s",
             opacity: 1,
             animationFillMode: "forwards",
           }}
         >
-          <p className="text-2xl md:text-3xl text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text font-light tracking-wide">
+          <p className="text-xl sm:text-2xl md:text-3xl text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text font-light tracking-wide">
             Artificial Intelligence | Fullstack Development | Data Science
           </p>
-          <p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed font-mono">
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed font-mono">
             <span className="text-green-400">&gt;</span> Integrating AI models
             into reliable and production-ready applications
             <br />
@@ -283,7 +300,7 @@ export default function HeroSection() {
 
         {/* Action Buttons */}
         <div
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fadeInUp"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center animate-fadeInUp"
           style={{
             animationDelay: "1.8s",
             opacity: 1,
@@ -291,17 +308,17 @@ export default function HeroSection() {
           }}
         >
           <button
-            className="group px-8 py-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 backdrop-blur-md border border-cyan-400/30 rounded-xl text-white hover:from-cyan-500/30 hover:to-blue-500/30 hover:border-cyan-400/50 transition-all duration-500 shadow-lg hover:shadow-cyan-400/20 font-mono text-sm animate-float"
+            className="group px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 backdrop-blur-md border border-cyan-400/30 rounded-xl text-white hover:from-cyan-500/30 hover:to-blue-500/30 hover:border-cyan-400/50 transition-all duration-500 shadow-lg hover:shadow-cyan-400/20 font-mono text-xs sm:text-sm animate-float"
             data-hover
           >
             <span className="flex items-center gap-2">
               <span>View My Work</span>
-              <div className="w-2 h-2 bg-cyan-400 rounded-full group-hover:animate-pulse" />
+              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-cyan-400 rounded-full group-hover:animate-pulse" />
             </span>
           </button>
 
           <button
-            className="group px-8 py-4 text-gray-300 hover:text-white transition-colors duration-500 border border-gray-700 hover:border-gray-500 rounded-xl font-mono text-sm backdrop-blur-md bg-black/20"
+            className="group px-6 sm:px-8 py-3 sm:py-4 text-gray-300 hover:text-white transition-colors duration-500 border border-gray-700 hover:border-gray-500 rounded-xl font-mono text-xs sm:text-sm backdrop-blur-md bg-black/20"
             data-hover
           >
             <span className="flex items-center gap-2">
@@ -316,7 +333,7 @@ export default function HeroSection() {
 
       {/* Bottom Info */}
       <div
-        className="absolute bottom-8 left-8 text-sm text-gray-500 font-mono animate-fadeIn"
+        className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 text-xs sm:text-sm text-gray-500 font-mono animate-fadeIn"
         style={{
           animationDelay: "2.5s",
           opacity: 1,
@@ -324,17 +341,17 @@ export default function HeroSection() {
         }}
       >
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+          <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-green-400 rounded-full animate-pulse" />
           <span>Location: Jakarta, Indonesia</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+          <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-blue-400 rounded-full animate-pulse" />
           <span>Status: Available for projects</span>
         </div>
       </div>
 
       <div
-        className="absolute bottom-8 right-8 text-sm text-gray-500 text-right font-mono animate-fadeIn"
+        className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 text-xs sm:text-sm text-gray-500 text-right font-mono animate-fadeIn"
         style={{
           animationDelay: "2.5s",
           opacity: 1,
@@ -342,7 +359,7 @@ export default function HeroSection() {
         }}
       >
         <div className="mb-2">Scroll to explore more</div>
-        <div className="text-2xl animate-bounce">↓</div>
+        <div className="text-xl sm:text-2xl animate-bounce">↓</div>
       </div>
     </section>
   );

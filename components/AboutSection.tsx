@@ -78,6 +78,11 @@ const achievementData: AchievementData = {
       description:
         "Achieved 1st Place in the Objective Quest category of Dataquest 4.0, part of Airnology 4.0, competing against 100+ teams nationwide. The challenge focused on applying NLP techniques to legal documents for predicting sentencing duration, demonstrating strengths in data science, problem-solving, and collaboration.",
     },
+    {
+      title: "🥉 3rd Place - AI Innovation Challenge COMPFEST 17",
+      description:
+        "Secured 3rd place out of 240+ teams in the AI Innovation Challenge, a prestigious national competition hosted by COMPFEST, Universitas Indonesia's Faculty of Computer Science. Our team developed Horus AI, an intelligent surveillance system using computer vision to tackle illegal parking, aligning with the competition's theme of 'Smart City and Urban Living'. The project involved creating an end-to-end solution to capture incidents and provide context-aware insights for smarter city management",
+    },
   ],
 };
 
@@ -371,7 +376,7 @@ export default function AboutAndExperience() {
                           {achievement.title}
                         </h3>
 
-                        <p className="text-gray-400 text-sm leading-relaxed line-clamp-4">
+                        <p className="text-gray-400 text-sm leading-relaxed">
                           {achievement.description}
                         </p>
                       </div>
