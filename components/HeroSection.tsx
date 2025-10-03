@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import Image from "next/image"; // Import Image component
 import ProfilePicture from "../public/profilepicture.jpeg";
 
 export default function HeroSection() {
@@ -197,7 +198,7 @@ export default function HeroSection() {
       />
 
       {/* AI Status Indicators */}
-      <div className="absolute top-8 sm:top-16 right-4 sm:right-8 z-10 space-y-3">
+      <div className="absolute top-32 sm:top-40 right-4 sm:right-8 z-10 space-y-3">
         <div
           className="flex items-center gap-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-xl px-3 sm:px-4 py-2 sm:py-3 animate-fadeInRight"
           style={{
@@ -267,9 +268,11 @@ export default function HeroSection() {
             animationFillMode: "forwards",
           }}
         >
-          <img
-            src={ProfilePicture.src}
+          <Image
+            src={ProfilePicture}
             alt="Vincentius Jacob Gunawan"
+            width={224} // Matches lg:w-56 (56 * 4 = 224px)
+            height={224} // Matches lg:h-56
             className="w-40 h-40 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full border-2 border-cyan-400/50 object-cover shadow-lg shadow-cyan-400/20"
           />
         </div>

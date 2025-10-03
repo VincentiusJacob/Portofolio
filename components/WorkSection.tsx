@@ -10,6 +10,7 @@ import TrafficSign from "../public/trafficsign.png";
 import TwitterDash from "../public/twitterdash.png";
 import MyAssets from "../public/myassets.png";
 import AbleCareers from "../public/ablecareers.png";
+import { StaticImageData } from "next/image";
 
 // --- Type Definitions for TypeScript ---
 interface Project {
@@ -149,7 +150,7 @@ const projectsData: Project[] = [
 ];
 
 // Project Image Mapping
-const projectImages: { [key: number]: any } = {
+const projectImages: { [key: number]: StaticImageData } = {
   1: MyAssets,
   2: TrafficSign,
   3: SmartIllegal,
