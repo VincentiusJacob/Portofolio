@@ -32,14 +32,8 @@ const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
     icon: Linkedin,
-    url: "https://linkedin.com/in/vincentiusjacob",
+    url: "https://www.linkedin.com/in/vincentius-jacob-922b56302/",
     color: "hover:text-blue-400",
-  },
-  {
-    name: "Twitter",
-    icon: Twitter,
-    url: "https://twitter.com/vincentiusjacob",
-    color: "hover:text-cyan-400",
   },
   {
     name: "Email",
@@ -50,7 +44,7 @@ const socialLinks: SocialLink[] = [
   {
     name: "Youtube",
     icon: Youtube,
-    url: "https://www.youtube.com/channel/your-channel-id",
+    url: "https://www.youtube.com/@vincentjacob2991",
     color: "hover:text-red-500",
   },
 ];
