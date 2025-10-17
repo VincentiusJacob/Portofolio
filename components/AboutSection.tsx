@@ -50,7 +50,7 @@ const experienceData: ExperienceData = {
       role: "Software Developer (March-Present)",
       company: "IT Division Bina Nusantara University",
       description:
-        "Led AI transformation initiatives, architected intelligent systems, and developed scalable AI-powered applications.",
+        "",
     },
   ],
   "2024": [
@@ -58,7 +58,7 @@ const experienceData: ExperienceData = {
       role: "Business Development & Public Relations (August - December)",
       company: "Medika Health Companion",
       description:
-        "Advised startups on implementing ML models and data-driven features.",
+        "",
     },
   ],
 };
